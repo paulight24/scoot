@@ -1,28 +1,22 @@
 {
-  "sentiments": [
+  "todos": [
     {
       "id": 1,
-      "sentiment": "Positive",
-      "explanation": "The input text contains a high proportion of positive words.",
-      "command": "How can I be the best in my field?"
+      "description": "The input text contains a high proportion of negative words.",
+      "dueDate": "2023-07-04T07:00:00.000Z",
+      "priority": 1
     },
     {
       "id": 2,
-      "sentiment": "Negative",
-      "explanation": "The input text contains a high proportion of negative words.",
-      "command": "A sample negative command"
+      "description": "The input text contains a high proportion of Neutral words.",
+      "dueDate": "2023-07-04T07:00:00.000Z",
+      "priority": 2
     },
     {
-      "id": 3,
-      "sentiment": "Neutral",
-      "explanation": "The input text contains a high proportion of Neutral words.",
-      "command": "Hmm, maybe"
-    },
-    {
-      "id": 4,
-      "sentiment": "Positive",
-      "explanation": "The input text contains a high proportion of positive words.",
-      "command": "How can I be the best solution provider?"
+      "dueDate": "2023-07-04T07:00:00.000Z",
+      "description": "The input text contains a high proportion of Neutral words.",
+      "priority": 3,
+      "id": 3
     }
   ]
 }

@@ -1,0 +1,22 @@
+<p class="ms-3" mat-dialog-title>Todo item details</p>
+
+<mat-dialog-content>
+    <mat-list>
+        <mat-list-item>
+            <span matListItemTitle>Date Due</span>
+            <span matListItemLine>{{ data.row.dueDate | date:'fullDate' }}</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>Description</span>
+            <span matListItemLine>{{ data.row.description}}</span>
+        </mat-list-item>
+        <mat-list-item>
+            <span matListItemTitle>Priority</span>
+            <span matListItemLine>{{ data.row.priority}}</span>
+        </mat-list-item>
+    </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions class="m-3">
+    <button mat-raised-button [mat-dialog-close]="true" color="primary">Close</button>
+</mat-dialog-actions>

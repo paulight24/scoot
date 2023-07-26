@@ -1,20 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Sentiment } from '../models/sentiments';
 import { Observable } from 'rxjs';
+import { Todo } from '../models/todo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpConnectService {
-  server: string = 'http://localhost:3000/sentiments';
+  server: string = 'http://localhost:3000/todos';
   constructor(private http: HttpClient) { }
 
-  fetchSentiments(): Observable<Sentiment[]> {
-    return this.http.get(this.server) as Observable<Sentiment[]>;
+  fetchTodos(): Observable<Todo[]> {
+    return this.http.get(this.server) as Observable<Todo[]>;
   }
 
-  addSentiment(data: Partial<Sentiment>): Observable<Sentiment> {
-    return this.http.post(this.server, data) as Observable<Sentiment>;
+  addTodo(data: Partial<Todo>): Observable<Todo> {
+    return this.http.post(this.server, data) as Observable<Todo>;
+  }
+
+  fetchUpdateTodo(data: Partial<Todo>) {
+    return this.http.patch(`${this.server}/${data?.id}`, data) as Observable<Todo>;
+  }
+
+  fetchDeleteTodo(id: number) {
+    return this.http.delete(`${this.server}/${id}`);
   }
 }

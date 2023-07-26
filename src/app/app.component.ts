@@ -1,4 +1,5 @@
-import { SentimentDetailsComponent } from './components/sentiment-details/sentiment-details.component';
+import { UtilityService } from './services/utility.service';
+import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
 import { RestService } from './services/rest.service';
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,7 +8,7 @@ import { AddUserInputComponent } from './components/user-input/user-input.compon
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { tap } from 'rxjs';
-import { Sentiment } from './models/sentiments';
+import { Todo } from './models/todo';
 
 @Component({
   selector: 'app-root',
@@ -15,21 +16,21 @@ import { Sentiment } from './models/sentiments';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Artificial Intelligence AI Model';
+  title = 'Todo management application';
 
-  dataSource!: MatTableDataSource<Sentiment>;
+  dataSource!: MatTableDataSource<Todo>;
   displayedColumns: string[] = [
     'id',
-    'command',
-    'sentiment',
-    'details'
+    'dueDate',
+    'description',
+    'priority'
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  /** This gets the data from the json-server into an observable that will later be async | */
-  $getSentiments = this.restService.getSentimentList().pipe(
+  /** This gets the data from the json-server into an observable that will later be async | piped */
+  $getTodos = this.restService.getTodoList().pipe(
     tap((res) => {
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.sort = this.sort;
@@ -40,14 +41,15 @@ export class AppComponent {
   constructor(
     private _dialog: MatDialog,
     private restService: RestService,
+    private utility: UtilityService
   ) { }
 
-  /** This opens a dialog when the user vlicks open dialog button, 
+  /** This opens a dialog when the user clicks open dialog button, 
    * it will both send and return data from the details page i.e 
-   * the child component called `SentimentDetailsComponent`
+   * the child component called `TodoDetailsComponent`
    **/
   openDetailsPage(row: any) {
-    const dialogRef = this._dialog.open(SentimentDetailsComponent, {
+    const dialogRef = this._dialog.open(TodoDetailsComponent, {
       data: { row }
     });
     dialogRef.afterClosed().subscribe({
@@ -57,7 +59,7 @@ export class AppComponent {
     });
   }
 
-  /** This opens a dialog when the user vlicks open dialog button, 
+  /** This opens a dialog when the user clicks open dialog button, 
    * it will both send and return data from the add input command 
    * page i.e the child component called `AddUserInputComponent`
    **/
@@ -68,9 +70,32 @@ export class AppComponent {
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         this.dataSource.data = this.dataSource.data;
-        // this.dataSource.data[val] ? this.dataSource.data = this.dataSource.data : this.dataSource.data = [...this.dataSource.data, val];
       },
     });
+  }
+
+  deleteTodo(row: Todo) {
+    this.restService.handleDeleteTodo(row.id)
+      .subscribe({
+        next: (res) => {
+          console.log('res: ', res);
+          this.utility.openSnackBar('Successfully deleted todo!');
+          // reload page
+          this.utility.reloadPage();
+        }
+      });
+  }
+
+  editTodo(row: Todo) {
+    const dialogRef = this._dialog.open(AddUserInputComponent, {
+      data: { todo: row }
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        this.dataSource.data = this.dataSource.data;
+      },
+    });
+
   }
 
   // Filters table data 

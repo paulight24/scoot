@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /** COMPONENTS */ 
 import { AppComponent } from './app.component';
 import { AddUserInputComponent } from './components/user-input/user-input.component';
-import { SentimentDetailsComponent } from './components/sentiment-details/sentiment-details.component';
+import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -16,7 +16,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
   declarations: [
     AppComponent,
     AddUserInputComponent,
-    SentimentDetailsComponent,
+    TodoDetailsComponent,
     HeaderComponent
   ],
   imports: [

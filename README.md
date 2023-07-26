@@ -1,4 +1,4 @@
-# ModMedAiModel
+# Scoot
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
 RUN `npm Install` !important
@@ -7,7 +7,7 @@ RUN `npm Install` !important
 
 To start the database server run `npm run server` 
 or `json-server --watch server/db.json`
-then open this link inside your browser to preview the local database: http://localhost:3000/sentiments
+then open this link inside your browser to preview the local database: http://localhost:3000/todos
 
 ## Development server
 

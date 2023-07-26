@@ -1,20 +1,51 @@
 <form [formGroup]="form" ngSubmit="submit()">
-    <h2 mat-dialog-title>Enter AI command below?</h2>
+    <h2 mat-dialog-title>Enter TODO item below?</h2>
 
     <mat-dialog-content>
         <p>
-            <mat-form-field appearance="outline">
-                <mat-label>AI input command</mat-label>
-                <textarea matInput placeholder="Insert" formControlName="command"></textarea>
-                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-
+            <mat-form-field>
+                <mat-label>Choose a due date </mat-label>
+                <input matInput formControlName="dueDate" [matDatepicker]="picker" datePickerFormat="MM/DD/YYYY"
+                    placeholder="MM/DD/YYYY">
                 <!-- ERROR HANDLING -->
                 <mat-hint class="text-danger">
-                    <ng-container *ngIf="command?.errors && (command?.touched || command?.dirty)">
+                    <ng-container *ngIf="dueDate?.errors && (dueDate?.touched || dueDate?.dirty)">
                         This field is required.
                     </ng-container>
                 </mat-hint>
 
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </p>
+
+
+        <p>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Add todo description</mat-label>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5" matInput
+                    placeholder="Insert" formControlName="description"></textarea>
+
+                <!-- ERROR HANDLING -->
+                <mat-hint class="text-danger">
+                    <ng-container *ngIf="description?.errors && (description?.touched || description?.dirty)">
+                        This field is required.
+                    </ng-container>
+                </mat-hint>
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Add todo priority</mat-label>
+                <input matInput type="number" maxlength="2" min="0" max="50" formControlName="priority" placeholder="0">
+
+                <!-- ERROR HANDLING -->
+                <mat-hint class="text-danger">
+                    <ng-container *ngIf="priority?.errors && (priority?.touched || priority?.dirty)">
+                        This field is required.
+                    </ng-container>
+                </mat-hint>
             </mat-form-field>
         </p>
     </mat-dialog-content>
