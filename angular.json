@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mod-med-ai-model": {
+    "scoot-ai": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mod-med-ai-model",
+            "outputPath": "dist/scoot-ai",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "mod-med-ai-model:build:production"
+              "browserTarget": "scoot-ai:build:production"
             },
             "development": {
-              "browserTarget": "mod-med-ai-model:build:development"
+              "browserTarget": "scoot-ai:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mod-med-ai-model:build"
+            "browserTarget": "scoot-ai:build"
           }
         },
         "test": {
